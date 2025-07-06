@@ -14,11 +14,12 @@
             background-color: #f0e6ff; /* হালকা পার্পল ব্যাকগ্রাউন্ড */
             color: #333;
             overflow-x: hidden;
+            position: relative;
         }
 
         /* গ্লাসমরফিজম স্টাইল */
         .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: 20px;
@@ -26,7 +27,7 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
         }
 
-        /* ব্যাকগ্রাউন্ডের অ্যাবস্ট্রাক্ট শেপ */
+        /* ব্যাকগ্রাউন্ডের শেপ কন্টেইনার */
         .background-shapes {
             position: absolute;
             top: 0;
@@ -37,40 +38,15 @@
             z-index: -1;
         }
 
-        .shape1 {
+        .shape {
             position: absolute;
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, #ff00ff, #8a2be2);
-            border-radius: 50%;
-            filter: blur(100px);
-            top: -100px;
-            left: -100px;
-            opacity: 0.6;
+            will-change: transform; /* অ্যানিমেশন পারফর্মেন্সের জন্য */
+            transition: transform 0.1s linear;
         }
 
-        .shape2 {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, #ffc0cb, #ff69b4);
-            border-radius: 50%;
-            filter: blur(120px);
-            bottom: -150px;
-            right: -150px;
-            opacity: 0.5;
-        }
-        
-        .shape3 {
-            position: absolute;
-            width: 250px;
-            height: 250px;
-            background: linear-gradient(135deg, #e6e6fa, #d8bfd8);
-            border-radius: 50%;
-            filter: blur(90px);
-            top: 40%;
-            right: 10%;
-            opacity: 0.4;
+        .shape svg {
+            width: 100%;
+            height: 100%;
         }
 
         .hero-media-container {
@@ -90,12 +66,30 @@
 <body class="relative">
 
     <div class="background-shapes">
-        <div class="shape1"></div>
-        <div class="shape2"></div>
-        <div class="shape3"></div>
+        <!-- খাবারের আইকনগুলো এখানে যোগ করা হয়েছে -->
+        <!-- চালের দানা (SVG) -->
+        <div class="shape" style="top: 15%; left: 5%; width: 60px; height: 60px; opacity: 0.5;">
+            <svg viewBox="0 0 512 512" fill="#A78BFA"><path d="M451.2 153.3C429.3 124.3 393.3 124.3 371.3 153.3L256 294.5L140.7 153.3C118.7 124.3 82.7 124.3 60.8 153.3C38.8 182.3 38.8 227.7 60.8 256.7L215.3 448.7C237.3 477.7 274.7 477.7 296.7 448.7L451.2 256.7C473.2 227.7 473.2 182.3 451.2 153.3z"/></svg>
+        </div>
+         <!-- রান্নার হাঁড়ি (SVG) -->
+        <div class="shape" style="top: 20%; right: 10%; width: 100px; height: 100px; opacity: 0.4;">
+            <svg viewBox="0 0 24 24" fill="#C084FC"><path d="M20.6,10.1l-0.2,0H3.6l-0.2,0C1.5,10.1,0,11.6,0,13.5v1C0,15.9,1.5,17.4,3.4,17.4h17.2c1.9,0,3.4-1.5,3.4-3.4v-1 C24,11.6,22.5,10.1,20.6,10.1z M2,13.5c0-0.8,0.6-1.4,1.4-1.4h0.2l0.2,0h16.4l0.2,0h0.2c0.8,0,1.4,0.6,1.4,1.4v1 c0,0.8-0.6,1.4-1.4,1.4H3.4C2.6,15.9,2,15.3,2,14.5V13.5z"/><path d="M20,5H4C1.8,5,0,6.8,0,9h24C24,6.8,22.2,5,20,5z"/></svg>
+        </div>
+        <!-- তারা মসলা (SVG) -->
+        <div class="shape" style="top: 75%; left: 15%; width: 80px; height: 80px; opacity: 0.6;">
+            <svg viewBox="0 0 24 24" fill="#F472B6"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <!-- চামচ (SVG) -->
+        <div class="shape" style="top: 80%; right: 20%; width: 70px; height: 70px; opacity: 0.3;">
+            <svg viewBox="0 0 24 24" fill="#A78BFA"><path d="M16.2,15.3c-2.3-1.3-4.9-2-7.7-2c-2.8,0-5.4,0.7-7.7,2C0.3,15.6,0,16.1,0,16.7v1.8C0,19.9,1.1,21,2.5,21h19 c1.4,0,2.5-1.1,2.5-2.5v-1.8C24,16.1,23.7,15.6,23.2,15.3z M12,5c-2.8,0-5,2.2-5,5s2.2,5,5,5s5-2.2,5-5S14.8,5,12,5z"/></svg>
+        </div>
+         <!-- আরও একটি চালের দানা -->
+        <div class="shape" style="top: 50%; left: 45%; width: 40px; height: 40px; opacity: 0.4;">
+            <svg viewBox="0 0 512 512" fill="#F9A8D4"><path d="M451.2 153.3C429.3 124.3 393.3 124.3 371.3 153.3L256 294.5L140.7 153.3C118.7 124.3 82.7 124.3 60.8 153.3C38.8 182.3 38.8 227.7 60.8 256.7L215.3 448.7C237.3 477.7 274.7 477.7 296.7 448.7L451.2 256.7C473.2 227.7 473.2 182.3 451.2 153.3z"/></svg>
+        </div>
     </div>
 
-    <div class="container mx-auto px-4 py-8 md:py-16">
+    <div class="container mx-auto px-4 py-8 md:py-16 relative z-10">
 
         <!-- Hero Section -->
         <header class="text-center mb-16 md:mb-24">
@@ -121,14 +115,22 @@
 
         <!-- Offer Section -->
         <section class="mb-16 md:mb-24 flex justify-center">
-            <div class="glass-effect p-8 md:p-10 w-full max-w-3xl text-center text-gray-800">
-                <h2 class="text-3xl font-bold mb-4">বিশেষ মূল্যছাড়!</h2>
-                <div class="flex items-center justify-center space-x-4 mb-6">
-                    <span class="text-2xl md:text-3xl text-gray-500 line-through">~~৩২০ টাকা~~</span>
-                    <span class="text-4xl md:text-5xl font-bold text-purple-700">২৫০ টাকা/কেজি</span>
+            <div class="glass-effect p-8 md:p-10 w-full max-w-4xl text-gray-800 flex flex-col md:flex-row items-center gap-8">
+                <!-- Image on the left -->
+                <div class="md:w-1/3 w-full">
+                    <img src="basmati.jpg" alt="বাসমতী চালের প্যাকেট" class="rounded-2xl shadow-lg w-full h-auto object-cover"
+                    onerror="this.onerror=null;this.src='https://placehold.co/400x400/FFF0F5/8A2BE2?text=চাল&font=hind-siliguri';">
                 </div>
-                <div class="bg-pink-200 text-pink-800 font-semibold py-3 px-6 rounded-lg inline-block">
-                    প্রতি কেজিতে সরাসরি ৭০ টাকা ছাড়!
+                <!-- Text content on the right -->
+                <div class="md:w-2/3 w-full text-center md:text-left">
+                    <h2 class="text-3xl font-bold mb-4">বিশেষ মূল্যছাড়!</h2>
+                    <div class="flex items-center justify-center md:justify-start space-x-4 mb-6">
+                        <span class="text-2xl md:text-3xl text-gray-500 line-through">পূর্বমূল্যঃ ৩২০ টাকা</span>
+                        <span class="text-4xl md:text-5xl font-bold text-purple-700">২৫০ টাকা/কেজি</span>
+                    </div>
+                    <div class="bg-pink-200 text-pink-800 font-semibold py-3 px-6 rounded-lg inline-block">
+                        প্রতি কেজিতে সরাসরি ৭০ টাকা ছাড়!
+                    </div>
                 </div>
             </div>
         </section>
@@ -141,7 +143,7 @@
                 <div class="glass-effect p-6 text-center hover:bg-white/20 transition duration-300">
                     <div class="text-4xl text-purple-500 mb-4">🍚</div>
                     <h3 class="text-xl font-semibold mb-2 text-gray-700">লম্বা ও ঝরঝরে দানা</h3>
-                    <p class="text-gray-600">লম্বা, চিকন ও белоснеজ দানা যা রান্নার পর আরও বেড়ে ওঠে এবং ঝরঝরে থাকে।</p>
+                    <p class="text-gray-600">লম্বা, চিকন ও ঝরঝরে দানা যা রান্নার পর আরো বেড়ে ওঠে এবং ঝরঝরে থাকে।</p>
                 </div>
                 <!-- Feature 2 -->
                 <div class="glass-effect p-6 text-center hover:bg-white/20 transition duration-300">
@@ -175,6 +177,40 @@
         <p class="text-gray-700 font-semibold">Online Bajar Barguna</p>
         <p class="text-gray-600">যোগাযোগ: 01739416661</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const shapes = document.querySelectorAll('.shape');
+
+            // অ্যানিমেশন এবং প্যারালাক্স ইফেক্টের জন্য ফাংশন
+            function animateShapes() {
+                const scrollY = window.scrollY;
+                const time = performance.now();
+
+                shapes.forEach((shape, index) => {
+                    // বিভিন্ন শেপের জন্য ভিন্ন গতি এবং মুভমেন্ট
+                    // স্পিড মানগুলো একটু ভিন্ন করে দেওয়া হলো যাতে মুভমেন্ট আরও বৈচিত্র্যময় হয়
+                    const speed = (index % 3 + 1) * 0.12; 
+                    const floatSpeed = (index % 4 + 1) * 0.0004;
+                    
+                    // প্যারালাক্স ইফেক্ট (স্ক্রলের উপর ভিত্তি করে)
+                    const parallaxY = scrollY * speed;
+                    
+                    // ভাসমান ইফেক্ট (সময়ের উপর ভিত্তি করে)
+                    const floatY = Math.sin(time * floatSpeed) * 25; // মুভমেন্টের রেঞ্জ বাড়ানো হলো
+                    const floatX = Math.cos(time * floatSpeed) * 15;
+
+                    // দুটি ইফেক্ট একসাথে প্রয়োগ
+                    shape.style.transform = `translate(${floatX}px, ${parallaxY + floatY}px)`;
+                });
+
+                requestAnimationFrame(animateShapes);
+            }
+
+            // অ্যানিমেশন শুরু করুন
+            requestAnimationFrame(animateShapes);
+        });
+    </script>
 
 </body>
 </html>
