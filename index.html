@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রিমিয়াম বাসমতী চালের বিশেষ অফার</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: #f0e6ff; /* হালকা পার্পল ব্যাকগ্রাউন্ড */
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* গ্লাসমরফিজম স্টাইল */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        /* ব্যাকগ্রাউন্ডের অ্যাবস্ট্রাক্ট শেপ */
+        .background-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .shape1 {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #ff00ff, #8a2be2);
+            border-radius: 50%;
+            filter: blur(100px);
+            top: -100px;
+            left: -100px;
+            opacity: 0.6;
+        }
+
+        .shape2 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #ffc0cb, #ff69b4);
+            border-radius: 50%;
+            filter: blur(120px);
+            bottom: -150px;
+            right: -150px;
+            opacity: 0.5;
+        }
+        
+        .shape3 {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #e6e6fa, #d8bfd8);
+            border-radius: 50%;
+            filter: blur(90px);
+            top: 40%;
+            right: 10%;
+            opacity: 0.4;
+        }
+
+        .hero-media-container {
+            box-shadow: 0 20px 40px rgba(138, 43, 226, 0.3);
+            border-radius: 20px;
+        }
+        
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <div class="background-shapes">
+        <div class="shape1"></div>
+        <div class="shape2"></div>
+        <div class="shape3"></div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8 md:py-16">
+
+        <!-- Hero Section -->
+        <header class="text-center mb-16 md:mb-24">
+            <div class="flex justify-center mb-8">
+                <div class="hero-media-container overflow-hidden">
+                    <video src="basmati.mp4" 
+                           autoplay 
+                           loop 
+                           muted 
+                           playsinline
+                           class="w-full max-w-2xl rounded-2xl object-cover aspect-video">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4 leading-tight">
+                উৎসবের আয়োজনে যোগ করুন প্রিমিয়াম বাসমতী চালের সুবাস!
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 font-medium">
+                সীমিত সময়ের জন্য প্রতি কেজিতে ৭০ টাকা ছাড়! <span class="text-purple-600 font-semibold">এখন মাত্র ২৫০ টাকায়।</span>
+            </p>
+        </header>
+
+        <!-- Offer Section -->
+        <section class="mb-16 md:mb-24 flex justify-center">
+            <div class="glass-effect p-8 md:p-10 w-full max-w-3xl text-center text-gray-800">
+                <h2 class="text-3xl font-bold mb-4">বিশেষ মূল্যছাড়!</h2>
+                <div class="flex items-center justify-center space-x-4 mb-6">
+                    <span class="text-2xl md:text-3xl text-gray-500 line-through">~~৩২০ টাকা~~</span>
+                    <span class="text-4xl md:text-5xl font-bold text-purple-700">২৫০ টাকা/কেজি</span>
+                </div>
+                <div class="bg-pink-200 text-pink-800 font-semibold py-3 px-6 rounded-lg inline-block">
+                    প্রতি কেজিতে সরাসরি ৭০ টাকা ছাড়!
+                </div>
+            </div>
+        </section>
+
+        <!-- About the Product Section -->
+        <section class="mb-16 md:mb-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">কেন আমাদের বাসমতী চাল সেরা?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass-effect p-6 text-center hover:bg-white/20 transition duration-300">
+                    <div class="text-4xl text-purple-500 mb-4">🍚</div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-700">লম্বা ও ঝরঝরে দানা</h3>
+                    <p class="text-gray-600">লম্বা, চিকন ও белоснеজ দানা যা রান্নার পর আরও বেড়ে ওঠে এবং ঝরঝরে থাকে।</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="glass-effect p-6 text-center hover:bg-white/20 transition duration-300">
+                     <div class="text-4xl text-purple-500 mb-4">🌸</div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-700">অতুলনীয় সুগন্ধ</h3>
+                    <p class="text-gray-600">অতুলনীয় প্রাকৃতিক সুগন্ধ যা আপনার রান্নার স্বাদ বহুগুণ বাড়িয়ে দেবে।</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="glass-effect p-6 text-center hover:bg-white/20 transition duration-300">
+                     <div class="text-4xl text-purple-500 mb-4">🍲</div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-700">সব ধরনের রান্নার জন্য আদর্শ</h3>
+                    <p class="text-gray-600">পোলাও, বিরিয়ানি, ফ্রাইড রাইস বা খিচুড়ির জন্য একদম আদর্শ ও মানানসই।</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="text-center">
+             <div class="glass-effect p-8 md:p-12 w-full max-w-4xl mx-auto">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-800">এই বিশেষ অফারটি শেষ হওয়ার আগেই আপনার অর্ডারটি নিশ্চিত করুন!</h2>
+                <a href="https://www.m.me/RahmatullahZIsanofficial/" target="_blank" class="cta-button inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg">
+                    ফেসবুকে মেসেজ করে অর্ডার দিন
+                </a>
+             </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white/5 text-center py-6 mt-16">
+        <p class="text-gray-700 font-semibold">Online Bajar Barguna</p>
+        <p class="text-gray-600">যোগাযোগ: 01739416661</p>
+    </footer>
+
+</body>
+</html>
