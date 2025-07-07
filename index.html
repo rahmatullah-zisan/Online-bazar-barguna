@@ -67,6 +67,18 @@
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         }
+
+        /* ফেড-ইন অ্যানিমেশনের জন্য CSS */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="relative">
@@ -132,7 +144,7 @@
         </header>
 
         <!-- Offer Section -->
-        <section class="mb-16 md:mb-24 flex justify-center">
+        <section class="mb-16 md:mb-24 flex justify-center fade-in-section">
             <div class="glass-effect p-8 md:p-10 w-full max-w-4xl text-gray-800 flex flex-col md:flex-row items-center gap-8">
                 <!-- Image on the left -->
                 <div class="md:w-1/3 w-full">
@@ -159,7 +171,7 @@
         </section>
 
         <!-- About the Product Section -->
-        <section class="mb-16 md:mb-24">
+        <section class="mb-16 md:mb-24 fade-in-section">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">কেন আমাদের বাসমতী চাল সেরা?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Feature 1 -->
@@ -184,7 +196,7 @@
         </section>
 
         <!-- Customer Review Section -->
-        <section class="mb-16 md:mb-24">
+        <section class="mb-16 md:mb-24 fade-in-section">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">আমাদের গ্রাহকদের মতামত</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                 <!-- Review 1 -->
@@ -201,7 +213,7 @@
         </section>
 
         <!-- Call to Action Section -->
-        <section id="final-cta" class="text-center">
+        <section id="final-cta" class="text-center fade-in-section">
              <div class="glass-effect p-8 md:p-12 w-full max-w-4xl mx-auto">
                 <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-800">এই বিশেষ অফারটি শেষ হওয়ার আগেই আপনার অর্ডারটি নিশ্চিত করুন!</h2>
                 <a href="https://www.m.me/RahmatullahZIsanofficial/" target="_blank" class="cta-button inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg">
@@ -222,33 +234,44 @@
         document.addEventListener('DOMContentLoaded', () => {
             const shapes = document.querySelectorAll('.shape');
 
-            // অ্যানিমেশন এবং প্যারালাক্স ইফেক্টের জন্য ফাংশন
+            // ভাসমান শেপের জন্য অ্যানিমেশন
             function animateShapes() {
                 const scrollY = window.scrollY;
                 const time = performance.now();
 
                 shapes.forEach((shape, index) => {
-                    // বিভিন্ন শেপের জন্য ভিন্ন গতি এবং মুভমেন্ট
-                    // স্পিড মানগুলো একটু ভিন্ন করে দেওয়া হলো যাতে মুভমেন্ট আরও বৈচিত্র্যময় হয়
                     const speed = (index % 3 + 1) * 0.12; 
                     const floatSpeed = (index % 4 + 1) * 0.0004;
-                    
-                    // প্যারালাক্স ইফেক্ট (স্ক্রলের উপর ভিত্তি করে)
                     const parallaxY = scrollY * speed;
-                    
-                    // ভাসমান ইফেক্ট (সময়ের উপর ভিত্তি করে)
-                    const floatY = Math.sin(time * floatSpeed) * 25; // মুভমেন্টের রেঞ্জ বাড়ানো হলো
+                    const floatY = Math.sin(time * floatSpeed) * 25;
                     const floatX = Math.cos(time * floatSpeed) * 15;
-
-                    // দুটি ইফেক্ট একসাথে প্রয়োগ
                     shape.style.transform = `translate(${floatX}px, ${parallaxY + floatY}px)`;
                 });
 
                 requestAnimationFrame(animateShapes);
             }
-
-            // অ্যানিমেশন শুরু করুন
             requestAnimationFrame(animateShapes);
+
+            // স্ক্রল ফেড-ইন অ্যানিমেশন
+            const sections = document.querySelectorAll('.fade-in-section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
         });
     </script>
 
