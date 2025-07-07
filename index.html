@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Hind Siliguri', sans-serif;
             /* গ্রেডিয়েন্ট ব্যাকগ্রাউন্ড যুক্ত করা হয়েছে */
@@ -143,8 +146,13 @@
                         <span class="text-2xl md:text-3xl text-gray-500 line-through">পূর্বমূল্যঃ ৩২০ টাকা</span>
                         <span class="text-4xl md:text-5xl font-bold text-purple-700">২৫০ টাকা/কেজি</span>
                     </div>
-                    <div class="bg-pink-200 text-pink-800 font-semibold py-3 px-6 rounded-lg inline-block">
+                    <div class="bg-pink-200 text-pink-800 font-semibold py-3 px-6 rounded-lg inline-block mb-6">
                         প্রতি কেজিতে সরাসরি ৭০ টাকা ছাড়!
+                    </div>
+                    <div>
+                        <a href="#final-cta" class="cta-button inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg">
+                            এখনই অর্ডার করুন
+                        </a>
                     </div>
                 </div>
             </div>
@@ -175,8 +183,25 @@
             </div>
         </section>
 
+        <!-- Customer Review Section -->
+        <section class="mb-16 md:mb-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">আমাদের গ্রাহকদের মতামত</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <!-- Review 1 -->
+                <div class="glass-effect p-4 rounded-2xl transform hover:scale-105 transition-transform duration-300">
+                    <img src="cr1.jpg" alt="কাস্টমার রিভিউ ১" class="rounded-xl w-full h-auto object-cover"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x800/FFF0F5/8A2BE2?text=Review+1&font=hind-siliguri';">
+                </div>
+                <!-- Review 2 -->
+                <div class="glass-effect p-4 rounded-2xl transform hover:scale-105 transition-transform duration-300">
+                    <img src="cr2.jpg" alt="কাস্টমার রিভিউ ২" class="rounded-xl w-full h-auto object-cover"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x800/FFF0F5/8A2BE2?text=Review+2&font=hind-siliguri';">
+                </div>
+            </div>
+        </section>
+
         <!-- Call to Action Section -->
-        <section class="text-center">
+        <section id="final-cta" class="text-center">
              <div class="glass-effect p-8 md:p-12 w-full max-w-4xl mx-auto">
                 <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-800">এই বিশেষ অফারটি শেষ হওয়ার আগেই আপনার অর্ডারটি নিশ্চিত করুন!</h2>
                 <a href="https://www.m.me/RahmatullahZIsanofficial/" target="_blank" class="cta-button inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg">
