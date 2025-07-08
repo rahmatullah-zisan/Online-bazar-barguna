@@ -209,11 +209,31 @@
              <div class="glass-effect p-8 md:p-12 w-full max-w-4xl mx-auto">
                 <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-800">আজই মাত্র ২৫০ টাকায় প্রিমিয়াম বাসমতী চাল এবং ৩০০+ টাকার বোনাস লুফে নিন!</h2>
                 <p class="mb-6">মনে রাখবেন, এই অফারটি যেকোনো মুহূর্তে শেষ হয়ে যেতে পারে।</p>
-                <a href="https://www.m.me/RahmatullahZIsanofficial/" target="_blank" class="cta-button inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg">ফেসবুকে মেসেজ করে অর্ডার দিন</a>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="https://www.m.me/RahmatullahZIsanofficial/" target="_blank" class="cta-button inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg w-full sm:w-auto">
+                        ফেসবুকে মেসেজ করে অর্ডার দিন
+                    </a>
+                    <button id="show-address-btn" class="cta-button inline-block bg-transparent border-2 border-purple-600 text-purple-600 font-bold text-xl py-4 px-10 rounded-full shadow-lg w-full sm:w-auto">
+                        বাজারে দোকান থেকে সংগ্রহ করুন
+                    </button>
+                </div>
              </div>
         </section>
 
     </div>
+    
+    <!-- Address Modal -->
+    <div id="address-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
+        <div class="glass-effect p-8 rounded-2xl w-11/12 max-w-md text-center relative mx-4">
+            <button id="close-modal-btn" class="absolute top-2 right-4 text-gray-700 hover:text-red-500 text-3xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">আমাদের দোকানের ঠিকানা</h3>
+            <div class="text-left space-y-2 text-gray-700">
+                <p><strong class="font-semibold text-gray-800">নাম:</strong> রিয়াদ গার্মেন্টস</p>
+                <p><strong class="font-semibold text-gray-800">ঠিকানা:</strong> গার্মেন্টস পট্টি, হাফসা নাজ গার্মেন্টস এর পাশে ছোট দোকান।</p>
+            </div>
+        </div>
+    </div>
+
 
     <!-- নতুন প্রফেশনাল ফুটার -->
     <footer class="footer-texture text-gray-600 pt-16 pb-8">
@@ -312,6 +332,26 @@
                     countdownElement.innerHTML = "<p>অফারটি শেষ হয়ে গেছে!</p>";
                 }
             }, 1000);
+            
+            // Modal Logic
+            const showAddressBtn = document.getElementById('show-address-btn');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const addressModal = document.getElementById('address-modal');
+
+            showAddressBtn.addEventListener('click', () => {
+                addressModal.classList.remove('hidden');
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                addressModal.classList.add('hidden');
+            });
+
+            // Close modal if clicked outside of it
+            addressModal.addEventListener('click', (event) => {
+                if (event.target === addressModal) {
+                    addressModal.classList.add('hidden');
+                }
+            });
         });
     </script>
 
