@@ -245,6 +245,10 @@
                 <div class="space-y-4 text-left">
                     <input class="form-input w-full p-3 rounded-lg" type="text" name="নাম" placeholder="আপনার নাম" required>
                     <input class="form-input w-full p-3 rounded-lg" type="tel" name="ফোন নম্বর" placeholder="আপনার ফোন নম্বর" required>
+                     <div>
+                        <label for="quantity" class="block text-left text-gray-700 font-semibold mb-1">পরিমাণ (কেজি)</label>
+                        <input id="quantity" class="form-input w-full p-3 rounded-lg" type="number" name="পরিমাণ" value="1" min="1" required>
+                    </div>
                     <textarea class="form-input w-full p-3 rounded-lg" name="ঠিকানা" rows="3" placeholder="আপনার সম্পূর্ণ ঠিকানা" required></textarea>
                 </div>
                 <button type="submit" class="cta-button mt-6 w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg">
@@ -383,7 +387,7 @@
             });
 
             // Google Sheet Submission
-            const scriptURL = https://script.google.com/macros/s/AKfycbwCW9XrdCGUjpSwrz1RGXwONOdj1EqUCq-_IMWiHmuM2Xz8BLOYnc0sORvCBw39RFtt/exec; // গুরুত্বপূর্ণ: এই URL টি পরিবর্তন করতে হবে
+            const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'; // গুরুত্বপূর্ণ: এই URL টি পরিবর্তন করতে হবে
             const form = document.forms['submit-to-google-sheet'];
             const msg = document.getElementById('form-submission-msg');
 
