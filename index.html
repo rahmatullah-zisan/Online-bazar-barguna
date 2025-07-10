@@ -87,6 +87,20 @@
         .form-input {
             background: rgba(255, 255, 255, 0.5);
             border: 1px solid rgba(167, 139, 250, 0.5);
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .order-form-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s ease-in-out, opacity 0.5s ease-in-out, padding 0.7s ease-in-out;
+            opacity: 0;
+        }
+        .order-form-container.active {
+            max-height: 1200px; 
+            opacity: 1;
+            padding-top: 2rem;
         }
     </style>
 </head>
@@ -233,32 +247,62 @@
                 </div>
              </div>
         </section>
+        
+        <!-- Order Form Section (Collapsible) -->
+        <section id="order-form-container" class="order-form-container fade-in-section">
+            <div class="glass-effect p-8 md:p-12 w-full max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">অর্ডার করতে আপনার তথ্য দিন</h3>
+                <form name="submit-to-google-sheet" class="max-w-lg mx-auto">
+                    <div class="space-y-4 text-left">
+                        <input class="form-input" type="text" name="নাম" placeholder="আপনার নাম" required>
+                        <input class="form-input" type="tel" name="ফোন নম্বর" placeholder="আপনার ফোন নম্বর" required>
+                        <div>
+                            <label for="quantity" class="block text-left text-gray-700 font-semibold mb-1">পরিমাণ (কেজি)</label>
+                            <input id="quantity" class="form-input" type="number" name="পরিমাণ" value="1" min="1" required>
+                        </div>
+                        <textarea class="form-input" name="ঠিকানা" rows="3" placeholder="আপনার সম্পূর্ণ ঠিকানা" required></textarea>
+                        
+                        <div class="bg-purple-100 p-4 rounded-lg text-center">
+                            <h4 class="font-semibold text-lg text-gray-800">মোট মূল্য: <span id="total-price" class="text-purple-700">250</span> টাকা</h4>
+                        </div>
+                        <input type="hidden" name="মোট মূল্য" id="total-amount-input">
+
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-2">পেমেন্ট অপশন:</h4>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <label class="flex-1 flex items-center p-3 rounded-lg border-2 border-purple-300 cursor-pointer has-[:checked]:bg-purple-200 has-[:checked]:border-purple-500">
+                                    <input type="radio" name="Delivery Option" value="Cash on Delivery" class="mr-2" checked>
+                                    ক্যাশ অন ডেলিভারি
+                                </label>
+                                <label class="flex-1 flex items-center p-3 rounded-lg border-2 border-purple-300 cursor-pointer has-[:checked]:bg-purple-200 has-[:checked]:border-purple-500">
+                                    <input type="radio" name="Delivery Option" value="bKash Payment" class="mr-2">
+                                    বিকাশ পেমেন্ট
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="bkash-payment-info" class="hidden space-y-3 pt-4 border-t border-purple-200">
+                            <h4 class="font-semibold text-gray-800">বিকাশ পেমেন্ট করার নিয়ম:</h4>
+                            <ol class="list-decimal list-inside text-sm space-y-1">
+                                <li>আপনার বিকাশ অ্যাপ থেকে "পেমেন্ট" অপশন সিলেক্ট করুন।</li>
+                                <li>মার্চেন্ট নম্বর হিসেবে দিন: <strong class="text-purple-700">017XXXXXXXX</strong></li>
+                                <li>টোটাল (<span id="bkash-total">250</span>) টাকা পেমেন্ট করুন।</li>
+                                <li>পেমেন্ট শেষে যে TrxID পাবেন, সেটি নিচের বক্সে দিন।</li>
+                            </ol>
+                            <input class="form-input" type="text" name="TrxID" placeholder="আপনার বিকাশ TrxID দিন">
+                        </div>
+
+                    </div>
+                    <button type="submit" class="cta-button mt-6 w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg">
+                        অর্ডার কনফার্ম করুন
+                    </button>
+                </form>
+                <p id="form-submission-msg" class="mt-4 font-semibold"></p>
+            </div>
+        </section>
 
     </div>
     
-    <!-- Order Form Modal -->
-    <div id="order-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
-        <div class="modal-content-box p-8 rounded-2xl w-11/12 max-w-md text-center relative mx-4">
-            <button id="close-order-modal-btn" class="absolute top-2 right-4 text-gray-700 hover:text-red-500 text-3xl font-bold">&times;</button>
-            <h3 class="text-2xl font-bold text-gray-800 mb-4">অর্ডার করতে তথ্য দিন</h3>
-            <form name="submit-to-google-sheet">
-                <div class="space-y-4 text-left">
-                    <input class="form-input w-full p-3 rounded-lg" type="text" name="নাম" placeholder="আপনার নাম" required>
-                    <input class="form-input w-full p-3 rounded-lg" type="tel" name="ফোন নম্বর" placeholder="আপনার ফোন নম্বর" required>
-                     <div>
-                        <label for="quantity" class="block text-left text-gray-700 font-semibold mb-1">পরিমাণ (কেজি)</label>
-                        <input id="quantity" class="form-input w-full p-3 rounded-lg" type="number" name="পরিমাণ" value="1" min="1" required>
-                    </div>
-                    <textarea class="form-input w-full p-3 rounded-lg" name="ঠিকানা" rows="3" placeholder="আপনার সম্পূর্ণ ঠিকানা" required></textarea>
-                </div>
-                <button type="submit" class="cta-button mt-6 w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg">
-                    অর্ডার সেন্ড করুন
-                </button>
-            </form>
-            <p id="form-submission-msg" class="mt-4 font-semibold"></p>
-        </div>
-    </div>
-
     <!-- Address Modal -->
     <div id="address-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
         <div class="modal-content-box p-8 rounded-2xl w-11/12 max-w-md text-center relative mx-4">
@@ -368,22 +412,59 @@
                 }
             }, 1000);
             
-            // Modal Logic
+            // Modal & Collapsible Form Logic
             const orderBtn = document.getElementById('order-now-btn');
             const addressBtn = document.getElementById('show-address-btn');
-            const orderModal = document.getElementById('order-modal');
             const addressModal = document.getElementById('address-modal');
-            const closeOrderBtn = document.getElementById('close-order-modal-btn');
             const closeAddressBtn = document.getElementById('close-address-modal-btn');
+            const orderFormContainer = document.getElementById('order-form-container');
 
-            orderBtn.addEventListener('click', () => orderModal.classList.remove('hidden'));
+            orderBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                orderFormContainer.classList.toggle('active');
+                if(orderFormContainer.classList.contains('active')) {
+                    orderFormContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
             addressBtn.addEventListener('click', () => addressModal.classList.remove('hidden'));
-            closeOrderBtn.addEventListener('click', () => orderModal.classList.add('hidden'));
             closeAddressBtn.addEventListener('click', () => addressModal.classList.add('hidden'));
             
             window.addEventListener('click', (event) => {
-                if (event.target === orderModal) orderModal.classList.add('hidden');
                 if (event.target === addressModal) addressModal.classList.add('hidden');
+            });
+
+            // Order Form Logic
+            const quantityInput = document.getElementById('quantity');
+            const totalPriceSpan = document.getElementById('total-price');
+            const totalAmountInput = document.getElementById('total-amount-input');
+            const bkashTotalSpan = document.getElementById('bkash-total');
+            const paymentOptions = document.querySelectorAll('input[name="Delivery Option"]');
+            const bkashInfoDiv = document.getElementById('bkash-payment-info');
+            const trxIdInput = document.querySelector('input[name="TrxID"]');
+            const pricePerKg = 250;
+
+            function updatePrice() {
+                const quantity = parseInt(quantityInput.value) || 0;
+                const total = quantity * pricePerKg;
+                totalPriceSpan.textContent = total;
+                bkashTotalSpan.textContent = total;
+                totalAmountInput.value = total; // Update hidden input
+            }
+            
+            updatePrice(); // Set initial price
+
+            quantityInput.addEventListener('input', updatePrice);
+            
+            paymentOptions.forEach(option => {
+                option.addEventListener('change', (event) => {
+                    if (event.target.value === 'bKash Payment') {
+                        bkashInfoDiv.classList.remove('hidden');
+                        trxIdInput.required = true;
+                    } else {
+                        bkashInfoDiv.classList.add('hidden');
+                        trxIdInput.required = false;
+                    }
+                });
             });
 
             // Google Sheet Submission with Validation
@@ -395,29 +476,29 @@
             form.addEventListener('submit', e => {
                 e.preventDefault();
                 
-                // Phone number validation
                 if (phoneInput.value.length !== 11 || !/^\d{11}$/.test(phoneInput.value)) {
                     msg.textContent = 'অনুগ্রহ করে ১১ ডিজিটের সঠিক ফোন নম্বর দিন।';
                     msg.classList.remove('text-green-600');
                     msg.classList.add('text-red-500');
                     phoneInput.style.border = '2px solid red';
-                    return; // Stop submission
+                    return;
                 }
 
-                // If validation passes
                 msg.textContent = 'অর্ডার পাঠানো হচ্ছে...';
                 msg.classList.remove('text-red-500');
                 msg.classList.add('text-green-600');
-                phoneInput.style.border = ''; // Reset border color
-
+                phoneInput.style.border = '';
+                
                 fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                     .then(response => {
                         msg.textContent = 'আপনার অর্ডারটি সফলভাবে পাঠানো হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।';
                         form.reset();
+                        updatePrice();
+                        bkashInfoDiv.classList.add('hidden');
                         setTimeout(() => {
-                           orderModal.classList.add('hidden');
                            msg.textContent = '';
-                        }, 3000);
+                           orderFormContainer.classList.remove('active');
+                        }, 4000);
                     })
                     .catch(error => {
                         msg.textContent = 'একটি সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।';
@@ -426,7 +507,6 @@
                     });
             });
 
-            // Reset validation message on input
             phoneInput.addEventListener('input', () => {
                 if (msg.classList.contains('text-red-500')) {
                     msg.textContent = '';
@@ -438,7 +518,7 @@
             function setCircularFavicon(imageUrl) {
                 const favicon = document.getElementById('favicon');
                 const canvas = document.createElement('canvas');
-                const size = 32; // Standard favicon size
+                const size = 32;
                 canvas.width = size;
                 canvas.height = size;
                 const context = canvas.getContext('2d');
@@ -451,6 +531,9 @@
                     context.clip();
                     context.drawImage(img, 0, 0, size, size);
                     favicon.href = canvas.toDataURL('image/png');
+                };
+                img.onerror = () => {
+                    console.error("Favicon image failed to load.");
                 };
                 img.src = imageUrl;
             }
