@@ -72,12 +72,10 @@
             padding: 0.5rem 1rem;
             border-radius: 8px;
         }
-        /* নতুন ফুটার স্টাইল */
         .footer-texture {
             background-color: #e9e2f8;
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-        /* পপ-আপ বক্সের জন্য নতুন স্টাইল */
         .modal-content-box {
             background: rgba(245, 240, 255, 0.95);
             backdrop-filter: blur(8px);
@@ -85,6 +83,10 @@
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+        }
+        .form-input {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(167, 139, 250, 0.5);
         }
     </style>
 </head>
@@ -207,9 +209,9 @@
         <section class="mb-16 md:mb-24 fade-in-section">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">মাত্র ৩টি সহজ ধাপে অর্ডার করুন</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-effect p-6 text-center"><div class="text-4xl mb-2">1️⃣</div><h3 class="text-xl font-semibold">অর্ডার করুন</h3><p>নিচের বাটনে ক্লিক করে মেসেজ দিন।</p></div>
-                <div class="glass-effect p-6 text-center"><div class="text-4xl mb-2">2️⃣</div><h3 class="text-xl font-semibold">ঠিকানা দিন</h3><p>আপনার নাম, ঠিকানা ও ফোন নম্বর জানান।</p></div>
-                <div class="glass-effect p-6 text-center"><div class="text-4xl mb-2">3️⃣</div><h3 class="text-xl font-semibold">ডেলিভারি নিন</h3><p>আমরা আপনার ঠিকানায় চাল পৌঁছে দেব।</p></div>
+                <div class="glass-effect p-6 text-center"><div class="text-4xl mb-2">1️⃣</div><h3 class="text-xl font-semibold">অর্ডার করুন</h3><p>নিচের বাটনে ক্লিক করে তথ্য পূরণ করুন।</p></div>
+                <div class="glass-effect p-6 text-center"><div class="text-4xl mb-2">2️⃣</div><h3 class="text-xl font-semibold">কনফার্মেশন</h3><p>আমরা আপনার সাথে ফোনে যোগাযোগ করব।</p></div>
+                <div class="glass-effect p-6 text-center"><div class="text-4xl mb-2">3️⃣</div><h3 class="text-xl font-semibold">ডেলিভারি নিন</h3><p>আপনার ঠিকানায় চাল পৌঁছে যাবে।</p></div>
             </div>
         </section>
 
@@ -219,22 +221,44 @@
                 <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-800">আজই মাত্র ২৫০ টাকায় প্রিমিয়াম বাসমতী চাল এবং ৩০০+ টাকার বোনাস লুফে নিন!</h2>
                 <p class="mb-6">মনে রাখবেন, এই অফারটি যেকোনো মুহূর্তে শেষ হয়ে যেতে পারে।</p>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="https://www.m.me/RahmatullahZIsanofficial/" target="_blank" class="cta-button inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg w-full sm:w-auto">
-                        ফেসবুকে মেসেজ করে অর্ডার দিন
-                    </a>
-                    <button id="show-address-btn" class="cta-button inline-block bg-transparent border-2 border-purple-600 text-purple-600 font-bold text-xl py-4 px-10 rounded-full shadow-lg w-full sm:w-auto">
-                        বাজারে দোকান থেকে সংগ্রহ করুন
+                    <button id="order-now-btn" class="cta-button inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg w-full sm:w-auto">
+                        অর্ডার করুন
                     </button>
+                    <button id="show-address-btn" class="cta-button inline-block bg-transparent border-2 border-purple-600 text-purple-600 font-bold text-xl py-4 px-10 rounded-full shadow-lg w-full sm:w-auto">
+                        দোকান থেকে সংগ্রহ করুন
+                    </button>
+                     <a href="https://www.m.me/RahmatullahZIsanofficial/" target="_blank" class="cta-button inline-block bg-transparent border-2 border-purple-600 text-purple-600 font-bold text-xl py-4 px-10 rounded-full shadow-lg w-full sm:w-auto">
+                        ফেসবুকে মেসেজ দিন
+                    </a>
                 </div>
              </div>
         </section>
 
     </div>
     
+    <!-- Order Form Modal -->
+    <div id="order-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
+        <div class="modal-content-box p-8 rounded-2xl w-11/12 max-w-md text-center relative mx-4">
+            <button id="close-order-modal-btn" class="absolute top-2 right-4 text-gray-700 hover:text-red-500 text-3xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">অর্ডার করতে তথ্য দিন</h3>
+            <form name="submit-to-google-sheet">
+                <div class="space-y-4 text-left">
+                    <input class="form-input w-full p-3 rounded-lg" type="text" name="নাম" placeholder="আপনার নাম" required>
+                    <input class="form-input w-full p-3 rounded-lg" type="tel" name="ফোন নম্বর" placeholder="আপনার ফোন নম্বর" required>
+                    <textarea class="form-input w-full p-3 rounded-lg" name="ঠিকানা" rows="3" placeholder="আপনার সম্পূর্ণ ঠিকানা" required></textarea>
+                </div>
+                <button type="submit" class="cta-button mt-6 w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg">
+                    অর্ডার সেন্ড করুন
+                </button>
+            </form>
+            <p id="form-submission-msg" class="mt-4 text-green-600 font-semibold"></p>
+        </div>
+    </div>
+
     <!-- Address Modal -->
     <div id="address-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
         <div class="modal-content-box p-8 rounded-2xl w-11/12 max-w-md text-center relative mx-4">
-            <button id="close-modal-btn" class="absolute top-2 right-4 text-gray-700 hover:text-red-500 text-3xl font-bold">&times;</button>
+            <button id="close-address-modal-btn" class="absolute top-2 right-4 text-gray-700 hover:text-red-500 text-3xl font-bold">&times;</button>
             <h3 class="text-2xl font-bold text-gray-800 mb-4">আমাদের দোকানের ঠিকানা</h3>
             <div class="text-left space-y-2 text-gray-700">
                 <p><strong class="font-semibold text-gray-800">নাম:</strong> রিয়াদ গার্মেন্টস</p>
@@ -244,7 +268,7 @@
     </div>
 
 
-    <!-- নতুন প্রফেশনাল ফুটার -->
+    <!-- Footer -->
     <footer class="footer-texture text-gray-600 pt-16 pb-8">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
@@ -288,6 +312,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Floating shapes animation
             const shapes = document.querySelectorAll('.shape');
             function animateShapes() {
                 const scrollY = window.scrollY;
@@ -304,6 +329,7 @@
             }
             requestAnimationFrame(animateShapes);
 
+            // Fade-in animation on scroll
             const sections = document.querySelectorAll('.fade-in-section');
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
             const observer = new IntersectionObserver((entries, observer) => {
@@ -319,23 +345,19 @@
             // Countdown Timer
             const countdownElement = document.getElementById('countdown-timer');
             const countdownDate = new Date().setDate(new Date().getDate() + 7);
-
             const interval = setInterval(() => {
                 const now = new Date().getTime();
                 const distance = countdownDate - now;
-
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
                 countdownElement.innerHTML = `
                     <div><span>${days}</span><p class="text-sm mt-1">দিন</p></div>
                     <div><span>${hours}</span><p class="text-sm mt-1">ঘন্টা</p></div>
                     <div><span>${minutes}</span><p class="text-sm mt-1">মিনিট</p></div>
                     <div><span>${seconds}</span><p class="text-sm mt-1">সেকেন্ড</p></div>
                 `;
-
                 if (distance < 0) {
                     clearInterval(interval);
                     countdownElement.innerHTML = "<p>অফারটি শেষ হয়ে গেছে!</p>";
@@ -343,23 +365,44 @@
             }, 1000);
             
             // Modal Logic
-            const showAddressBtn = document.getElementById('show-address-btn');
-            const closeModalBtn = document.getElementById('close-modal-btn');
+            const orderBtn = document.getElementById('order-now-btn');
+            const addressBtn = document.getElementById('show-address-btn');
+            const orderModal = document.getElementById('order-modal');
             const addressModal = document.getElementById('address-modal');
+            const closeOrderBtn = document.getElementById('close-order-modal-btn');
+            const closeAddressBtn = document.getElementById('close-address-modal-btn');
 
-            showAddressBtn.addEventListener('click', () => {
-                addressModal.classList.remove('hidden');
+            orderBtn.addEventListener('click', () => orderModal.classList.remove('hidden'));
+            addressBtn.addEventListener('click', () => addressModal.classList.remove('hidden'));
+            closeOrderBtn.addEventListener('click', () => orderModal.classList.add('hidden'));
+            closeAddressBtn.addEventListener('click', () => addressModal.classList.add('hidden'));
+            
+            window.addEventListener('click', (event) => {
+                if (event.target === orderModal) orderModal.classList.add('hidden');
+                if (event.target === addressModal) addressModal.classList.add('hidden');
             });
 
-            closeModalBtn.addEventListener('click', () => {
-                addressModal.classList.add('hidden');
-            });
+            // Google Sheet Submission
+            const scriptURL = https://script.google.com/macros/s/AKfycbwCW9XrdCGUjpSwrz1RGXwONOdj1EqUCq-_IMWiHmuM2Xz8BLOYnc0sORvCBw39RFtt/exec; // গুরুত্বপূর্ণ: এই URL টি পরিবর্তন করতে হবে
+            const form = document.forms['submit-to-google-sheet'];
+            const msg = document.getElementById('form-submission-msg');
 
-            // Close modal if clicked outside of it
-            addressModal.addEventListener('click', (event) => {
-                if (event.target === addressModal) {
-                    addressModal.classList.add('hidden');
-                }
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                msg.textContent = 'অর্ডার পাঠানো হচ্ছে...';
+                fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                    .then(response => {
+                        msg.textContent = 'আপনার অর্ডারটি সফলভাবে পাঠানো হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।';
+                        form.reset();
+                        setTimeout(() => {
+                           orderModal.classList.add('hidden');
+                           msg.textContent = '';
+                        }, 3000);
+                    })
+                    .catch(error => {
+                        msg.textContent = 'একটি সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।';
+                        console.error('Error!', error.message);
+                    });
             });
         });
     </script>
