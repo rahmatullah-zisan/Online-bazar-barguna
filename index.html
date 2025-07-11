@@ -112,6 +112,22 @@
             opacity: 1;
             padding-top: 2rem;
         }
+        .sticky-cta {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: bottom 0.5s ease-in-out;
+            z-index: 40;
+        }
+        .sticky-cta.visible {
+            bottom: 20px;
+        }
+        .honeypot-field {
+            position: absolute;
+            left: -5000px;
+            visibility: hidden;
+        }
     </style>
 </head>
 <body class="relative">
@@ -141,6 +157,14 @@
             <p class="text-xl md:text-2xl text-gray-600 font-medium mb-8">এই অবিশ্বাস্য অফারটি শুধুমাত্র প্রথম ৫০ জনের জন্য এবং সীমিত সময়ের!</p>
             <a href="#final-cta" class="cta-button inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg">অফারটি লুফে নিন</a>
         </header>
+
+        <!-- About Us Section -->
+        <section class="mb-16 md:mb-24 fade-in-section">
+            <div class="glass-effect p-8 md:p-12 w-full max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-800">আমাদের গল্প</h2>
+                <p class="text-lg text-gray-700 leading-relaxed">আমি ব্যক্তিগতভাবে বাসমতী চালের একজন বড় ভক্ত। কিন্তু আমি প্রায়ই দেখতাম, যে চাল আমাদের প্রতিবেশী দেশে অনেক কম দামে পাওয়া যায়, সেটি আমাদের দেশে ৩-৪ গুণ বেশি দামে বিক্রি হচ্ছে। এই ব্যবধানটিই আমাকে অনুপ্রাণিত করে। আমি বিশ্বাস করি, সেরা মানের প্রিমিয়াম বাসমতী চাল সবার জন্য সহজলভ্য হওয়া উচিত। সেই চিন্তা থেকেই 'Online Bajar Barguna'-এর যাত্রা শুরু—সরাসরি উৎস থেকে সেরা চাল সংগ্রহ করে, কোনো মধ্যস্বত্বভোগী ছাড়াই আপনার কাছে পৌঁছে দেওয়া, যাতে আপনি সেরা জিনিসটা পান, কিন্তু সেরা দামে।</p>
+            </div>
+        </section>
 
         <!-- Problem/Pain Point Section -->
         <section class="mb-16 md:mb-24 fade-in-section">
@@ -276,6 +300,7 @@
                             <h4 class="font-semibold text-lg text-gray-800">মোট মূল্য: <span id="total-price" class="text-purple-700">250</span> টাকা</h4>
                         </div>
                         <input type="hidden" name="মোট মূল্য" id="total-amount-input">
+                        <input type="text" name="website" class="honeypot-field" aria-hidden="true" tabindex="-1">
 
                         <div>
                             <h4 class="font-semibold text-gray-800 mb-2">পেমেন্ট অপশন:</h4>
@@ -301,7 +326,6 @@
                             </ol>
                             <input class="form-input" type="text" name="TrxID" placeholder="আপনার বিকাশ TrxID দিন">
                         </div>
-
                     </div>
                     <button type="submit" class="cta-button mt-6 w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg">
                         অর্ডার কনফার্ম করুন
@@ -323,6 +347,22 @@
                 <p><strong class="font-semibold text-gray-800">ঠিকানা:</strong> গার্মেন্টস পট্টি, হাফসা নাজ গার্মেন্টস এর পাশে ছোট দোকান।</p>
             </div>
         </div>
+    </div>
+    
+    <!-- Exit-Intent Popup -->
+    <div id="exit-intent-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
+        <div class="modal-content-box p-8 rounded-2xl w-11/12 max-w-md text-center relative mx-4">
+            <button id="close-exit-modal-btn" class="absolute top-2 right-4 text-gray-700 hover:text-red-500 text-3xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-purple-700 mb-4">যাবার আগে আরেকবার ভাবুন!</h3>
+            <p class="text-lg text-gray-700">এই অবিশ্বাস্য অফারটি কিন্তু সীমিত সময়ের জন্য। ৩০০+ টাকার উপহার এবং ১০০ টাকা ছাড় হাতছাড়া করবেন না!</p>
+        </div>
+    </div>
+    
+    <!-- Sticky CTA Button -->
+    <div id="sticky-cta-btn" class="sticky-cta">
+        <a href="#final-cta" class="cta-button inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg">
+            অফারটি লুফে নিন
+        </a>
     </div>
 
 
@@ -458,10 +498,10 @@
                 const total = quantity * pricePerKg;
                 totalPriceSpan.textContent = total;
                 bkashTotalSpan.textContent = total;
-                totalAmountInput.value = total; // Update hidden input
+                totalAmountInput.value = total;
             }
             
-            updatePrice(); // Set initial price
+            updatePrice();
 
             quantityInput.addEventListener('input', updatePrice);
             
@@ -491,6 +531,11 @@
                     msg.classList.remove('text-green-600');
                     msg.classList.add('text-red-500');
                     phoneInput.style.border = '2px solid red';
+                    return;
+                }
+                
+                if (form.querySelector('.honeypot-field').value) {
+                    console.log('Bot detected');
                     return;
                 }
 
@@ -523,6 +568,30 @@
                     phoneInput.style.border = '';
                 }
             });
+
+            // Sticky CTA Logic
+            const stickyBtn = document.getElementById('sticky-cta-btn');
+            const heroSection = document.getElementById('home');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > heroSection.offsetHeight) {
+                    stickyBtn.classList.add('visible');
+                } else {
+                    stickyBtn.classList.remove('visible');
+                }
+            });
+            
+            // Exit-Intent Popup Logic
+            const exitModal = document.getElementById('exit-intent-modal');
+            const closeExitBtn = document.getElementById('close-exit-modal-btn');
+            document.addEventListener('mouseout', (e) => {
+                if (!e.toElement && !e.relatedTarget) {
+                    if(!sessionStorage.getItem('exitIntentShown')) {
+                        exitModal.classList.remove('hidden');
+                        sessionStorage.setItem('exitIntentShown', 'true');
+                    }
+                }
+            });
+            closeExitBtn.addEventListener('click', () => exitModal.classList.add('hidden'));
 
             // Circular Favicon
             function setCircularFavicon(imageUrl) {
