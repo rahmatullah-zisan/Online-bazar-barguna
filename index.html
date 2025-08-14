@@ -167,6 +167,11 @@
                         <span class="text-4xl md:text-5xl font-bold text-purple-700">৩০০ টাকা/কেজি</span>
                     </div>
                     <div class="bg-pink-200 text-pink-800 font-semibold py-3 px-6 rounded-lg inline-block mb-6">আপনি প্রতি কেজিতে সরাসরি ৫০ টাকা ছাড় পাচ্ছেন!</div>
+                    <div>
+                        <button id="offer-cta-btn" class="cta-button inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg">
+                            অর্ডার করুন
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -392,6 +397,7 @@
             
             // Modal & Collapsible Form Logic
             const orderBtn = document.getElementById('order-now-btn');
+            const offerCtaBtn = document.getElementById('offer-cta-btn');
             const addressBtn = document.getElementById('show-address-btn');
             const addressModal = document.getElementById('address-modal');
             const closeAddressBtn = document.getElementById('close-address-modal-btn');
@@ -404,6 +410,15 @@
                     orderFormContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
+            if (offerCtaBtn) {
+                offerCtaBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if(!orderFormContainer.classList.contains('active')) {
+                        orderFormContainer.classList.add('active');
+                    }
+                    orderFormContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
             addressBtn.addEventListener('click', () => addressModal.classList.remove('hidden'));
             closeAddressBtn.addEventListener('click', () => addressModal.classList.add('hidden'));
             
