@@ -108,7 +108,7 @@
         <section id="offer" class="mb-16 md:mb-24 flex justify-center fade-in-section">
             <div class="glass-effect p-8 md:p-10 w-full max-w-4xl text-gray-800 flex flex-col md:flex-row items-center gap-8">
                 <div class="md:w-1/3 w-full">
-                    <img src="fortune basmati rice biriyani special.webp" width="1024" height="1536" loading="lazy" alt="বাসমতী চালের প্যাকেট" class="rounded-2xl shadow-lg w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x400/FFF0F5/8A2BE2?text=চাল&font=hind-siliguri';">
+                    <img data-src="fortune basmati rice biriyani special.webp" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="1024" height="1536" loading="lazy" alt="বাসমতী চালের প্যাকেট" class="rounded-2xl shadow-lg w-full h-auto object-cover lazy-image" onerror="this.onerror=null;this.src='https://placehold.co/400x400/FFF0F5/8A2BE2?text=চাল&font=hind-siliguri';">
                 </div>
                 <div class="md:w-2/3 w-full text-center md:text-left">
                     <h2 class="text-3xl font-bold mb-4">আপনার সকল সমস্যার সমাধান আমাদের প্রিমিয়াম বাসমতী চালে!</h2>
@@ -174,8 +174,8 @@
         <section id="reviews" class="mb-16 md:mb-24 fade-in-section">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">দেখুন আমাদের সন্তুষ্ট গ্রাহকরা কী বলছেন!</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                <div class="glass-effect p-4 rounded-2xl transform hover:scale-105 transition-transform duration-300"><img src="cr1.jpg" width="1080" height="333" loading="lazy" alt="কাস্টমার রিভিউ ১" class="rounded-xl w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x800/FFF0F5/8A2BE2?text=Review+1&font=hind-siliguri';"></div>
-                <div class="glass-effect p-4 rounded-2xl transform hover:scale-105 transition-transform duration-300"><img src="cr2.jpg" width="1080" height="362" loading="lazy" alt="কাস্টমার রিভিউ ২" class="rounded-xl w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x800/FFF0F5/8A2BE2?text=Review+2&font=hind-siliguri';"></div>
+                <div class="glass-effect p-4 rounded-2xl transform hover:scale-105 transition-transform duration-300"><img data-src="cr1.jpg" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="1080" height="333" loading="lazy" alt="কাস্টমার রিভিউ ১" class="rounded-xl w-full h-auto object-cover lazy-image" onerror="this.onerror=null;this.src='https://placehold.co/600x800/FFF0F5/8A2BE2?text=Review+1&font=hind-siliguri';"></div>
+                <div class="glass-effect p-4 rounded-2xl transform hover:scale-105 transition-transform duration-300"><img data-src="cr2.jpg" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="1080" height="362" loading="lazy" alt="কাস্টমার রিভিউ ২" class="rounded-xl w-full h-auto object-cover lazy-image" onerror="this.onerror=null;this.src='https://placehold.co/600x800/FFF0F5/8A2BE2?text=Review+2&font=hind-siliguri';"></div>
             </div>
         </section>
 
@@ -348,7 +348,22 @@
                 });
             }, observerOptions);
             sections.forEach(section => { observer.observe(section); });
-            
+
+            // Lazy load images
+            const lazyImages = document.querySelectorAll('img[data-src]');
+            const imgObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.onload = () => img.classList.add('loaded');
+                        img.removeAttribute('data-src');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            lazyImages.forEach(img => imgObserver.observe(img));
+
             // Modal & Collapsible Form Logic
             const orderBtn = document.getElementById('order-now-btn');
             const offerCtaBtn = document.getElementById('offer-cta-btn');
